@@ -1,0 +1,26 @@
+# In[]: Connect to Postgre Database
+#
+import os
+import psycopg2
+import datetime
+import pandas as pd
+os.chdir('C:\Postgres_Data_Export_Automation')
+#
+host = ' '
+user = ' '
+pwd = ' '
+port = ' '
+db = ' '
+conn = psycopg2.connect(dbname=db, user=user, password=pwd, host=host, port=port)
+cur = conn.cursor()
+#
+sql2 = """ SELECT * 
+            FROM batch_notification
+"""
+df2 = pd.read_sql_query(sql2, conn)
+#
+conn.commit()
+#
+# In[]:
+conn.close() # close the connection
+cur.close() # 
