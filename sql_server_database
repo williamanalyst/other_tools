@@ -1,0 +1,25 @@
+import pyodbc
+import datetime
+#
+server = ' '
+database = ' '
+username = ' '
+password = ' '
+driver= '{ODBC Driver 13 for SQL Server}'
+#
+cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
+cursor = cnxn.cursor()
+#cnxn = pyodbc.connect('DRIVER={SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+password)
+# Truncate Existing Tables
+##
+start_time=datetime.datetime.now()
+sql1 = """  TRUNCATE TABLE accountgroups
+            TRUNCATE TABLE items
+            """
+cursor.execute(sql1)
+#
+cnxn.commit()
+end_time = datetime.datetime.now()
+speed = end_time - start_time
+print(speed)
+print("All tables have been Truncated.")
